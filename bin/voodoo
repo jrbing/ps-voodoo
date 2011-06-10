@@ -1,0 +1,170 @@
+#!/usr/bin/env ruby
+
+require File.expand_path(
+    File.join(File.dirname(__FILE__), %w[.. lib voodoo]))
+require 'rubygems'
+require 'commander/import'
+
+program :name, 'Voodoo'
+program :version, Voodoo::VERSION
+program :description, 'Black Magic Utility for PeopleSoft Administration'
+
+command :add do |c|
+  c.syntax = 'voodoo add [environment name]'
+  c.summary = ''
+  c.description = ''
+  c.example 'description', 'command example'
+  c.option '--some-switch', 'Some switch that does something'
+  c.action do |args, options|
+    if args.first
+      Voodoo::Commands.add(args.first)
+    else
+      Voodoo::Commands.add
+    end
+  end
+end
+
+command :remove do |c|
+  c.syntax = 'voodoo remove [environment name]'
+  c.summary = ''
+  c.description = ''
+  c.example 'description', 'command example'
+  c.option '--some-switch', 'Some switch that does something'
+  c.action do |args, options|
+    if args.first
+        Voodoo::Commands.remove(args.first)
+    else
+      name = ask("Database name: ", Voodoo.environments.keys)
+      Voodoo::Commands.remove(name)
+    end
+  end
+end
+
+command :list do |c|
+  c.syntax = 'voodoo list'
+  c.summary = 'List configured environments'
+  c.description = ''
+  c.example 'description', 'command example'
+  c.option '--some-switch', 'Some switch that does something'
+  c.action do |args, options|
+    c.when_called Voodoo::Commands.list
+  end
+end
+
+command :show do |c|
+  c.syntax = 'voodoo show [options]'
+  c.summary = ''
+  c.description = ''
+  c.example 'description', 'command example'
+  c.option '--some-switch', 'Some switch that does something'
+  c.action do |args, options|
+    if args.first
+      if Voodoo.environments[args.first]
+        Voodoo::Commands.show(args.first)
+      else
+        puts "Environment #{args.first} is not listed in the configuration file"
+      end
+    else
+      name = ask("Database name: ", Voodoo.environments.keys)
+      Voodoo::Commands.show(name)
+    end
+  end
+end
+
+command :config do |c|
+  c.syntax = 'voodoo config [options]'
+  c.summary = ''
+  c.description = ''
+  c.example 'description', 'command example'
+  c.option '--some-switch', 'Some switch that does something'
+  c.action do |args, options|
+    c.when_called Voodoo::Commands.config
+  end
+end
+
+command :compare do |c|
+  c.syntax = 'voodoo compare [options]'
+  c.summary = ''
+  c.description = ''
+  c.example 'description', 'command example'
+  c.option '--some-switch', 'Some switch that does something'
+  c.action do |args, options|
+    if args.first
+      Voodoo::Commands.compare(args.first)
+    else
+      Voodoo::Commands.compare
+    end
+  end
+end
+
+command :build do |c|
+  c.syntax = 'voodoo build [options]'
+  c.summary = ''
+  c.description = ''
+  c.example 'description', 'command example'
+  c.option '--some-switch', 'Some switch that does something'
+  c.action do |args, options|
+    if args.first
+      Voodoo::Commands.build(args.first)
+    else
+      Voodoo::Commands.build
+    end
+  end
+end
+
+command :migrate do |c|
+  c.syntax = 'voodoo migrate [options]'
+  c.summary = ''
+  c.description = ''
+  c.example 'description', 'command example'
+  c.option '--some-switch', 'Some switch that does something'
+  c.action do |args, options|
+    if args.first
+      Voodoo::Commands.migrate(args.first)
+    else
+      Voodoo::Commands.migrate
+    end
+  end
+end
+
+command :'run sqr' do |c|
+  c.syntax = 'voodoo run sqr [options]'
+  c.summary = ''
+  c.description = ''
+  c.example 'description', 'command example'
+  c.option '--some-switch', 'Some switch that does something'
+  c.action do |args, options|
+    if args.first
+      Voodoo::Commands.run_sqr(args.first)
+    else
+      Voodoo::Commands.run_sqr
+    end
+  end
+end
+
+command :'run appengine' do |c|
+  c.syntax = 'voodoo run appengine [options]'
+  c.summary = ''
+  c.description = ''
+  c.example 'description', 'command example'
+  c.option '--some-switch', 'Some switch that does something'
+  c.action do |args, options|
+    if args.first
+      Voodoo::Commands.run_appengine(args.first)
+    else
+      Voodoo::Commands.run_appengine
+    end
+  end
+end
+
+command :test do |c|
+  c.syntax = 'voodoo setup [options]'
+  c.summary = ''
+  c.description = ''
+  c.example 'description', 'command example'
+  c.option '--some-switch', 'Some switch that does something'
+  c.action do |args, options|
+    c.when_called Voodoo::Commands.test
+  end
+end
+

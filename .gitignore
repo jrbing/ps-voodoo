@@ -1,4 +1,7 @@
-*.gem
+# bundler
 .bundle
-Gemfile.lock
-pkg/*
+
+# miscellaneous
+TODO.md
+lib/voodoo/commands/test.rb
+

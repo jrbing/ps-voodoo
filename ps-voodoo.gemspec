@@ -1,13 +1,13 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "ps-voodoo/version"
+require "voodoo/version"
 
 Gem::Specification.new do |s|
   s.name        = "ps-voodoo"
-  s.version     = Ps::Voodoo::VERSION
+  s.version     = Voodoo::VERSION
   s.authors     = ["JR Bing"]
   s.email       = ["jrbing@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/jrbing/ps-voodoo"
   s.summary     = %q{TODO: Write a gem summary}
   s.description = %q{TODO: Write a gem description}
 
