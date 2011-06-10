@@ -6,14 +6,7 @@ VooDoo is a command line application to help automate some PeopleSoft administra
 Features
 --------
 
-VooDoo allows you to do the following:
-
-PeopleSoft Projects
-    * compare
-    * archive
-    * migrate
-SQR
-Appengine
+* TODO
 
 Commands
 --------
@@ -28,15 +21,12 @@ Requirements
 Install
 -------
 
-* Download the most recent version of the gem
-    * FIXME (list where it should be downloaded from)
-* gem install voodoo
+* TODO
 
 Miscellaneous
 -------------
-* first ruby application
-* migration objects
-* 
+
+* TODO
 
 Author
 ------
@@ -49,7 +39,7 @@ License
 
 (The MIT License) 
 
-Copyright (c) 2011 J.R. Bing
+Copyright (c) 2011 JR Bing
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
