@@ -13,7 +13,7 @@ command :add do |c|
   c.syntax = 'voodoo add [environment name]'
   c.summary = 'adds an environment to the configuration file'
   c.description = 'Prompts for environment information and saves it to the environment configuration file'
-  c.example 'Prompt for setup values before adding PADMO to the configuration file', 'voodoo add PADMO'
+  c.example 'Prompt for setup values before adding VDDMO to the configuration file', 'voodoo add VDDMO'
   c.action do |args, options|
     if args.first
       Voodoo::Commands.add(args.first)
@@ -27,7 +27,7 @@ command :remove do |c|
   c.syntax = 'voodoo remove [environment name]'
   c.summary = 'removes an environment from the configuration file'
   c.description = 'Deletes the specified environment from the configuration file'
-  c.example 'Removes the environment PADMO from the configuration file', 'voodoo remove PADMO'
+  c.example 'Removes the environment VDDMO from the configuration file', 'voodoo remove VDDMO'
   c.action do |args, options|
     if args.first
         Voodoo::Commands.remove(args.first)
@@ -49,10 +49,10 @@ command :list do |c|
 end
 
 command :show do |c|
-  c.syntax = 'voodoo show [options]'
-  c.summary = ''
-  c.description = ''
-  c.example 'description', 'command example'
+  c.syntax = 'voodoo show [environment name]'
+  c.summary = 'shows configuration details for an environment'
+  c.description = 'Outputs a table containing information about the specified environment'
+  c.example 'Show information about VDDMO', 'voodoo show VDDMO'
   c.option '--some-switch', 'Some switch that does something'
   c.action do |args, options|
     if args.first
@@ -69,22 +69,21 @@ command :show do |c|
 end
 
 command :config do |c|
-  c.syntax = 'voodoo config [options]'
-  c.summary = ''
-  c.description = ''
-  c.example 'description', 'command example'
-  c.option '--some-switch', 'Some switch that does something'
+  c.syntax = 'voodoo config'
+  c.summary = 'create global configuration settings'
+  c.description = 'Prompts for global configuration information and saves it to the configuration file'
   c.action do |args, options|
     c.when_called Voodoo::Commands.config
   end
 end
 
 command :compare do |c|
-  c.syntax = 'voodoo compare [options]'
-  c.summary = ''
-  c.description = ''
-  c.example 'description', 'command example'
-  c.option '--some-switch', 'Some switch that does something'
+  c.syntax = 'voodoo compare [project] [options]'
+  c.summary = 'create a compare report for the specified project'
+  c.description = 'Creates an HTML compare report for the specified project and opens it in the default browser'
+  c.example 'Create a compare report between two environments', 'voodoo compare EXAMPLE_PROJECT --source VDDEV --target VDTEST'
+  c.option '--source', 'Specify the source environment'
+  c.option '--target', 'Specify the target environment'
   c.action do |args, options|
     if args.first
       Voodoo::Commands.compare(args.first)
@@ -95,11 +94,11 @@ command :compare do |c|
 end
 
 command :build do |c|
-  c.syntax = 'voodoo build [options]'
-  c.summary = ''
-  c.description = ''
-  c.example 'description', 'command example'
-  c.option '--some-switch', 'Some switch that does something'
+  c.syntax = 'voodoo build [project] [options]'
+  c.summary = 'builds a project definition in the specified environment'
+  c.description = 'Builds a project definition script for the specified project using AppDesigner and executes it in the target database'
+  c.example 'Build specified project', 'voodoo build EXAMPLE_PROJECT --source VDTEST'
+  c.option '--source', 'Specify the source environment'
   c.action do |args, options|
     if args.first
       Voodoo::Commands.build(args.first)
@@ -110,11 +109,12 @@ command :build do |c|
 end
 
 command :migrate do |c|
-  c.syntax = 'voodoo migrate [options]'
-  c.summary = ''
-  c.description = ''
-  c.example 'description', 'command example'
-  c.option '--some-switch', 'Some switch that does something'
+  c.syntax = 'voodoo migrate [project] [options]'
+  c.summary = 'migrates a project between environments'
+  c.description = 'Migrates a project between two environments after running a compare report and copying the objects to file'
+  c.example 'Migrate project between environments', 'voodoo migrate EXAMPLE_PROJECT --source VDDEV --target VDTEST'
+  c.option '--source', 'Specify the source environment'
+  c.option '--target', 'Specify the target environment'
   c.action do |args, options|
     if args.first
       Voodoo::Commands.migrate(args.first)
@@ -125,11 +125,11 @@ command :migrate do |c|
 end
 
 command :'run sqr' do |c|
-  c.syntax = 'voodoo run sqr [options]'
-  c.summary = ''
-  c.description = ''
-  c.example 'description', 'command example'
-  c.option '--some-switch', 'Some switch that does something'
+  c.syntax = 'voodoo run sqr [sqr name] [options]'
+  c.summary = 'runs the specified sqr locally'
+  c.description = 'Run the specified SQR locally using the sqr bin specified in the environment configuration.'
+  c.example 'Run SQR', 'voodoo run sqr SETSPACE.sqr --source VDDEV'
+  c.option '--source', 'Specify the source environment'
   c.action do |args, options|
     if args.first
       Voodoo::Commands.run_sqr(args.first)
@@ -140,16 +140,42 @@ command :'run sqr' do |c|
 end
 
 command :'run appengine' do |c|
-  c.syntax = 'voodoo run appengine [options]'
-  c.summary = ''
-  c.description = ''
-  c.example 'description', 'command example'
-  c.option '--some-switch', 'Some switch that does something'
+  c.syntax = 'voodoo run appengine [appengine name] [options]'
+  c.summary = 'runs the specified appengine locally'
+  c.description = 'Run the specified AppEngine locally.'
+  c.example 'Run AppEngine', 'voodoo run appengine XXXXX --source VDDEV'
+  c.option '--source', 'Specify the source environment'
   c.action do |args, options|
     if args.first
       Voodoo::Commands.run_appengine(args.first)
     else
       Voodoo::Commands.run_appengine
+    end
+  end
+end
+
+command :shell do |c|
+  c.syntax = 'voodoo shell'
+  c.summary = 'start Voodoo in and interactive console mode'
+  c.description = 'Starts Voodoo in a mode for entering multiple commands'
+  c.action do |args, options|
+      loop do
+        choose("x-x-x-x-x-x-x-x-x") do |menu|
+          menu.layout = :menu_only
+          menu.prompt = '>> '
+          menu.shell  = true
+
+          menu.choice(:load, "Load a file.") do |command, details|
+            say("Loading file with options:  #{details}...")
+          end
+
+          menu.choice(:save, "Save a file.") do |command, details|
+            say("Saving file with options:  #{details}...")
+          end
+
+          menu.choice(:quit, "Exit program.") { exit }
+
+      end
     end
   end
 end
