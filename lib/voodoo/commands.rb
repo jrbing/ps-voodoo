@@ -11,29 +11,37 @@ module Voodoo
     end
 
     def get_source
-      # choices = ENVIRONMENTS.keys
-
-      choose("Preconfigured environments") do |menu|
-        menu.index        = :letter
+      choose("Environments") do |menu|
+        menu.index = :letter
         menu.index_suffix = ") "
-        menu.prompt = "Select the source environment:  "
-        menu.choices(ENVIRONMENTS.keys) do |i|
-          puts i
+        menu.prompt = "Specify the source environment:  "
+        ENVIRONMENTS.keys.each do |x|
+          menu.choice(x) do |i|
+            selected_environment = i
+            env = OpenStruct.new(ENVIRONMENTS[selected_environment])
+            env.name = selected_environment
+            env.app_password = get_app_password(selected_environment)
+            return env
+          end
         end
       end
-
-      # env = OpenStruct.new(ENVIRONMENTS[selected_environment])
-      # env.name = selected_environment
-      # env.app_password = get_app_password(selected_environment)
-      # return env
     end
 
     def get_target
-      target = ask("Target environment: ", ENVIRONMENTS.keys)
-      env = OpenStruct.new(ENVIRONMENTS[target])
-      env.name = target
-      env.app_password = get_app_password(target)
-      return env
+      choose("Environments") do |menu|
+        menu.index = :letter
+        menu.index_suffix = ") "
+        menu.prompt = "Specify the target environment:  "
+        ENVIRONMENTS.keys.each do |x|
+          menu.choice(x) do |i|
+            selected_environment = i
+            env = OpenStruct.new(ENVIRONMENTS[selected_environment])
+            env.name = selected_environment
+            env.app_password = get_app_password(selected_environment)
+            return env
+          end
+        end
+      end
     end
 
     def get_migration
