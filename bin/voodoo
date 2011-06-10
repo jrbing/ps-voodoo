@@ -11,10 +11,9 @@ program :description, 'Black Magic Utility for PeopleSoft Administration'
 
 command :add do |c|
   c.syntax = 'voodoo add [environment name]'
-  c.summary = ''
-  c.description = ''
-  c.example 'description', 'command example'
-  c.option '--some-switch', 'Some switch that does something'
+  c.summary = 'adds an environment to the configuration file'
+  c.description = 'Prompts for environment information and saves it to the environment configuration file'
+  c.example 'Prompt for setup values before adding PADMO to the configuration file', 'voodoo add PADMO'
   c.action do |args, options|
     if args.first
       Voodoo::Commands.add(args.first)
@@ -26,10 +25,9 @@ end
 
 command :remove do |c|
   c.syntax = 'voodoo remove [environment name]'
-  c.summary = ''
-  c.description = ''
-  c.example 'description', 'command example'
-  c.option '--some-switch', 'Some switch that does something'
+  c.summary = 'removes an environment from the configuration file'
+  c.description = 'Deletes the specified environment from the configuration file'
+  c.example 'Removes the environment PADMO from the configuration file', 'voodoo remove PADMO'
   c.action do |args, options|
     if args.first
         Voodoo::Commands.remove(args.first)
@@ -42,10 +40,9 @@ end
 
 command :list do |c|
   c.syntax = 'voodoo list'
-  c.summary = 'List configured environments'
-  c.description = ''
-  c.example 'description', 'command example'
-  c.option '--some-switch', 'Some switch that does something'
+  c.summary = 'Outputs a list of configured environments'
+  c.description = 'Shows a list of all environments in the configuration file'
+  c.example 'List all environments', 'voodoo list'
   c.action do |args, options|
     c.when_called Voodoo::Commands.list
   end
@@ -164,7 +161,7 @@ command :test do |c|
   c.example 'description', 'command example'
   c.option '--some-switch', 'Some switch that does something'
   c.action do |args, options|
-    c.when_called Voodoo::Commands.test
+    c.when_called Voodoo::Commands.test(args)
   end
 end
 

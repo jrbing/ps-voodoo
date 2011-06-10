@@ -1,7 +1,6 @@
 require 'ostruct'
 require 'yaml'
 require 'lumberjack'
-require 'voodoo/version'
 
 module Voodoo
 

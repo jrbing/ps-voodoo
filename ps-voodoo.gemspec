@@ -8,8 +8,11 @@ Gem::Specification.new do |s|
   s.authors     = ["JR Bing"]
   s.email       = ["jrbing@gmail.com"]
   s.homepage    = "https://github.com/jrbing/ps-voodoo"
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{Black magic utility for PeopleSoft administration}
+  s.description = %q{A small command line utility for helping with PeopleSoft administration}
+
+  s.add_dependency("commander", [">= 4.0.4"])
+  s.add_dependency("terminal-table", [">= 1.4.2"])
 
   s.rubyforge_project = "ps-voodoo"
 
