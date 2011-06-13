@@ -8,8 +8,6 @@ Features
 
 * TODO
 
-Commands
---------
 
 Requirements
 ------------
@@ -21,18 +19,16 @@ Requirements
 Install
 -------
 
-* TODO
+gem install ps-voodoo
 
-Miscellaneous
--------------
+Commands
+--------
 
-* TODO
 
 Author
 ------
 
 Original author: JR Bing
-
 
 License
 -------

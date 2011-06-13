@@ -7,7 +7,7 @@ module Voodoo
     def migrate(args=nil)
       setup?
 
-      if args.first.nil?
+      if args.[0].nil?
         project = get_project
       else
         project = args.first

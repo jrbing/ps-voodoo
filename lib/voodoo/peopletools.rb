@@ -64,7 +64,7 @@ module Voodoo
       LOG.debug("Executable is set to #{@executable}")
       LOG.debug("Command line options are set to #{@command_line_options.join(" ")}")
       f = IO.popen(@executable + " " + @command_line_options.join(" "))
-      f.readlines.each { |line| LOG.info("#{line}")}
+      f.readlines.each { |line| LOG.debug("#{line}")}
       f.close
       @command_line_options.clear
       set_base_parameters

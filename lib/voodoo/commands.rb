@@ -8,7 +8,7 @@ module Voodoo
 
     def setup?
       if CONFIGURATION.ps_home == nil
-        LOG.warnA("Global configuration not defined...use <voodoo config>")
+        puts "Global configuration not defined...use <voodoo config>"
         exit
       end
 
@@ -25,7 +25,8 @@ module Voodoo
 
     def get_env(name)
       #TODO: fix this to throw an error message and exit if the environment isn't listed
-      OpenStruct.new(ENVIRONMENTS[name])
+      env = OpenStruct.new(ENVIRONMENTS[name])
+      env.app_password = get_app_password(name)
     end
 
     def get_source

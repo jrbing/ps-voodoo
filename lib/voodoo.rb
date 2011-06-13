@@ -85,7 +85,7 @@ module Voodoo
 
   def write_env_file
     environment_file = File.open(Voodoo.env_file, 'w')
-    LOG.info("Writing environment configuration file.")
+    LOG.debug("Writing environment configuration file.")
     environment_file.write(ENVIRONMENTS.to_yaml)
   end
 

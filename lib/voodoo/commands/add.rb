@@ -15,7 +15,7 @@ module Voodoo
       settings['db_username'] = ask("Database username: ") { |q| q.default = "sysadm" }
       settings['migration_archive'] = get_path("Archive destination")
       new_env = {name => settings}
-      LOG.info("Adding #{name} to the list of configured environments")
+      LOG.debug("Adding #{name} to the list of configured environments")
       ENVIRONMENTS.merge!(new_env)
       Voodoo.write_env_file
     end

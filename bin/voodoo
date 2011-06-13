@@ -108,34 +108,6 @@ end
 #   end
 # end
 
-# command :shell do |c|
-#   c.syntax = 'voodoo shell'
-#   c.summary = 'start Voodoo in and interactive console mode'
-#   c.description = 'Starts Voodoo in a mode for entering multiple commands'
-#   c.action do
-#       loop do
-#         choose("") do |menu|
-#           menu.layout = ''
-#           # menu.layout = :menu_only
-#           menu.prompt = '>>> '
-#           menu.shell  = true
-
-#           menu.choice(:list, "List configured environments") do |command, arguments|
-#             Voodoo::Commands.list
-#           end
-
-#           menu.choice(:show, "Show environment details") do |command, arguments|
-#             args = arguments.scan(/\w+/)
-#             Voodoo::Commands.show(args)
-#           end
-
-#           menu.choice(:quit, "Exit voodoo") { exit }
-
-#       end
-#     end
-#   end
-# end
-
 # command :test do |c|
 #   c.syntax = 'voodoo setup [options]'
 #   c.summary = ''
