@@ -1,6 +1,6 @@
 require 'ostruct'
 require 'yaml'
-require 'lumberjack'
+require 'logger'
 
 module Voodoo
 
@@ -10,8 +10,8 @@ module Voodoo
   PATH = ::File.dirname(LIBPATH) + ::File::SEPARATOR
 
   # Log settings
-  LOG = Lumberjack::Logger.new(device = STDOUT, :buffer_size => 0)
-  LOG.level = 'INFO'
+  LOG = Logger.new(STDOUT)
+  LOG.level = Logger::DEBUG
 
   def self.libpath( *args )
     rv =  args.empty? ? LIBPATH : ::File.join(LIBPATH, args.flatten)
@@ -70,6 +70,7 @@ module Voodoo
 
   def env_file
     filename = File.join(Voodoo.home, 'environments.yml')
+    File.open(filename, File::CREAT|File::RDWR)
     return filename
   end
 

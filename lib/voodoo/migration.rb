@@ -34,9 +34,7 @@ module Voodoo
     end
 
     def copy_to_archive(archive_folder)
-      if agree("Continue? ") == false
-        FileUtils.cp_r(@migration_folder, archive_folder, :noop => true, :verbose => true)
-      end
+      FileUtils.cp_r(@migration_folder, archive_folder, :verbose => true)
     end
 
     private
