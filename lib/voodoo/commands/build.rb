@@ -4,9 +4,11 @@ module Voodoo
   module Commands
     extend self
 
-    def build(project=nil)
-      if project.nil?
+    def build(args=nil)
+      if args.first.nil?
         project = get_project
+      else
+        project = args.first
       end
 
       source = get_source

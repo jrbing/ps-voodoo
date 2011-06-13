@@ -6,34 +6,58 @@ module Voodoo
   module Commands
     extend self
 
+    def setup?
+      if CONFIGURATION.ps_home == nil
+        LOG.warnA("Global configuration not defined...use <voodoo config>")
+        exit
+      end
+
+      if ENVIRONMENTS.empty?
+        puts "No environments defined....use <voodoo add [environment]>"
+        exit
+      end
+
+    end
+
     def get_project
       ask("Project name: ")
     end
 
-    def get_source
-      # choices = ENVIRONMENTS.keys
+    def get_env(name)
+      #TODO: fix this to throw an error message and exit if the environment isn't listed
+      OpenStruct.new(ENVIRONMENTS[name])
+    end
 
-      choose("Preconfigured environments") do |menu|
-        menu.index        = :letter
+    def get_source
+      choose("Environments") do |menu|
+        menu.index = :letter
         menu.index_suffix = ") "
-        menu.prompt = "Select the source environment:  "
-        menu.choices(ENVIRONMENTS.keys) do |i|
-          puts i
+        menu.prompt = "Specify the source environment:  "
+        ENVIRONMENTS.keys.each do |x|
+          menu.choice(x) do |i|
+            env = OpenStruct.new(ENVIRONMENTS[i])
+            env.name = i
+            env.app_password = get_app_password(i)
+            return env
+          end
         end
       end
-
-      # env = OpenStruct.new(ENVIRONMENTS[selected_environment])
-      # env.name = selected_environment
-      # env.app_password = get_app_password(selected_environment)
-      # return env
     end
 
     def get_target
-      target = ask("Target environment: ", ENVIRONMENTS.keys)
-      env = OpenStruct.new(ENVIRONMENTS[target])
-      env.name = target
-      env.app_password = get_app_password(target)
-      return env
+      choose("Environments") do |menu|
+        menu.index = :letter
+        menu.index_suffix = ") "
+        menu.prompt = "Specify the target environment:  "
+        ENVIRONMENTS.keys.each do |x|
+          menu.choice(x) do |i|
+            env = OpenStruct.new(ENVIRONMENTS[i])
+            env.name = i
+            env.app_password = get_app_password(i)
+            return env
+          end
+        end
+      end
     end
 
     def get_migration
@@ -41,12 +65,25 @@ module Voodoo
       Migration.new(folder_name)
     end
 
+    #TODO: validate that the SQR name and path is valid
     def get_sqr
       ask("SQR name: ")
     end
 
+    #TODO: validate that the appengine name and path is valid
     def get_appengine
       ask("Appengine name: ")
+    end
+
+    def get_path(prompt)
+      ask("#{prompt}: ") do |q|
+        q.validate = %r=^(([a-zA-Z]:)|(\\{2}\w+)\$?)(\\(\w[\w ]*))=
+        q.responses[:not_valid] = "Please enter a valid folder path."
+      end
+    end
+
+    def dttm
+      Time.now.strftime("%m/%d/%Y %H:%M:%S") + " >>> "
     end
 
     private

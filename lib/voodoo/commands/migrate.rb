@@ -4,20 +4,34 @@ module Voodoo
   module Commands
     extend self
 
-    def migrate(project=nil)
-      if project.nil?
+    def migrate(args=nil)
+      setup?
+
+      if args.first.nil?
         project = get_project
+      else
+        project = args.first
       end
 
-      source = get_source
-      target = get_target
-      migration = get_migration
+      if args[1].nil?
+        source = get_source
+      else
+        source = args[1].upcase
+      end
+
+      if args[2].nil?
+        target = get_target
+      else
+        target = args[2].upcase
+      end
 
       # Check for source and target being the same
       if source == target
-          says("Source and target cannot be the same")
+        says("Source and target cannot be the same")
+        exit
       end
 
+      migration = get_migration
       ad = Voodoo::AppDesigner.new
 
       # Compare source to target
@@ -41,12 +55,16 @@ module Voodoo
 
       # Build project in target database
       if agree("Build project in target database? ") == true
-          dm = Voodoo::DataMover.new
-          ad.build_project(project, migration, target)
-          dm.run(migration, target, "PSBUILD.sql")
+        dm = Voodoo::DataMover.new
+        ad.build_project(project, migration, target)
+        dm.run(migration, target, "PSBUILD.sql")
       end
 
-      # migration.copy_to_archive(target.
+      # Move output files to archive folder for the target
+      if agree("Copy output files to archive folder for #{target.name}? ") == true
+        migration.copy_to_archive(target.migration_archive)
+      end
+
 
     end
 
