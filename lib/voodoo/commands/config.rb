@@ -5,7 +5,7 @@ module Voodoo
 
     def self.config
       settings = {}
-      settings[:ps_home] = get_path("Local tools installation directory")
+      settings[:ps_home] = get_path("Local tools directory")
       settings[:migration_output_dir] = get_path("Output directory for migration data")
       Voodoo.write_config_file(settings)
     end
