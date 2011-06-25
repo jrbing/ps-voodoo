@@ -5,12 +5,12 @@ module Voodoo
 
     def self.remove(args=nil)
       if args[0].nil?
-        source = get_source
+        env = ask("Environment to remove?: ", ENVIRONMENTS.keys)
       else
-        source = args[0].upcase
+        env = args[0].upcase
       end
-      LOG.info("Removing #{source} from the list of configured environments")
-      ENVIRONMENTS.delete(source)
+      LOG.debug("Removing #{env} from the list of configured environments")
+      ENVIRONMENTS.delete(env)
       Voodoo.write_env_file
     end
 

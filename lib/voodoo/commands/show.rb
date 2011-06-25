@@ -4,6 +4,7 @@ module Voodoo
   module Commands
 
     def self.show(args=nil)
+      setup?
       if args[0].nil?
         source = ask("Environment name: ").upcase
       else

@@ -1,5 +1,6 @@
 require 'fileutils'
 require 'win32/registry'
+require 'open3'
 
 module Voodoo
 
@@ -63,9 +64,14 @@ module Voodoo
     def call_executable
       LOG.debug("Executable is set to #{@executable}")
       LOG.debug("Command line options are set to #{@command_line_options.join(" ")}")
-      f = IO.popen(@executable + " " + @command_line_options.join(" "))
-      f.readlines.each { |line| LOG.debug("#{line}")}
-      f.close
+      # f = IO.popen(@executable + " " + @command_line_options.join(" "))
+      # f.readlines.each { |line| LOG.debug("#{line}")}
+      # f.close
+      # output = Open3.popen3(@executable + " " + @command_line_options.join(" "))
+      # LOG.debug(output)
+      Open3.popen2(@executable + " " + @command_line_options.join(" ")) {|i,o,t|
+        p o.gets
+      }
       @command_line_options.clear
       set_base_parameters
     end

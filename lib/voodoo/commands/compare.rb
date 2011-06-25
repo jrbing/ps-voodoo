@@ -7,7 +7,7 @@ module Voodoo
     def compare(args=nil)
       setup?
 
-      if args.first.nil?
+      if args[0].nil?
         project = get_project
       else
         project = args.first
@@ -16,13 +16,13 @@ module Voodoo
       if args[1].nil?
         source = get_source
       else
-        source = args[1].upcase
+        source = get_env(args[1].upcase)
       end
 
       if args[2].nil?
         target = get_target
       else
-        target = args[2].upcase
+        target = get_env(args[2].upcase)
       end
 
       migration = get_migration

@@ -4,6 +4,7 @@ module Voodoo
 
     # TODO: add an error message if there are no environments configured
     def self.list
+      setup?
       env_table = table
       env_table.headings = ['Configured Environments']
       Voodoo.environments.keys.each do |env|
