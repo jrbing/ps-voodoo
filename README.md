@@ -1,13 +1,17 @@
 VooDoo
 ===========
 
-VooDoo is a command line application to help automate some PeopleSoft administration activities.  I originally wrote it as a way to automate migration of PeopleSoft projects between environments, but it has since been expanded to include additional functionality. 
+VooDoo is a command line application to help automate some PeopleSoft administration activities that are typically performed locally.  It was originally written as a way to automate migration of PeopleSoft projects between environments, but it has since been expanded to include additional functionality. 
+
 
 Features
 --------
 
-* TODO
-
+* Generate HTML compare reports for projects
+* Migrate projects between databases
+* Build project definitions
+* Run Application Engine programs locally
+* Run SQR's locally
 
 Requirements
 ------------
@@ -15,14 +19,15 @@ Requirements
 * Ruby 1.9.2
 * Working installation of PeopleSoft Application Designer, DataMover, SQR, Appengine
 * Windows XP or higher (Developed using Windows 7, tested on XP)
+* Oracle Database
 
 Install
 -------
 
 gem install ps-voodoo
 
-Commands
---------
+Usage
+-----
 
 
 Author

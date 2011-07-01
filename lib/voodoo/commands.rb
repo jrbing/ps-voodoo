@@ -35,6 +35,18 @@ module Voodoo
       return env
     end
 
+    def get_db_env(name)
+      if ENVIRONMENTS[name]
+          env = OpenStruct.new(ENVIRONMENTS[name])
+          env.name = name
+          env.db_password = get_db_password(name)
+      else
+          puts "#{name} is not listed in the configuration file"
+          exit
+      end
+      return env
+    end
+
     def get_source
       source = ask("Source environment: ", ENVIRONMENTS.keys)
       env = OpenStruct.new(ENVIRONMENTS[source])
@@ -48,6 +60,14 @@ module Voodoo
       env = OpenStruct.new(ENVIRONMENTS[target])
       env.name = target
       env.app_password = get_app_password(target)
+      return env
+    end
+
+    def get_database
+      name = ask("Database name: ", ENVIRONMENTS.keys)
+      env = OpenStruct.new(ENVIRONMENTS[name])
+      env.name = name
+      env.db_password = get_db_password(name)
       return env
     end
 
@@ -81,6 +101,10 @@ module Voodoo
     private
 
     def get_app_password(name)
+      ask("Password for #{name}: ") { |q| q.echo = "*" }
+    end
+
+    def get_db_password(name)
       ask("Password for #{name}: ") { |q| q.echo = "*" }
     end
 

@@ -3,7 +3,7 @@ module Voodoo
     module Commands
         extend self
 
-        def run_sqr(sqr_name=nil)
+        def run_sqr(args)
           setup?
 
           if args[0].nil?
@@ -15,13 +15,17 @@ module Voodoo
           if args[1].nil?
             target = get_target
           else
-            target = get_env(args[1].upcase)
+            target = get_db_env(args[1].upcase)
           end
 
           migration = get_migration
 
           instance = Voodoo::Sqr.new
-          instance.run(migration, target)
+          # puts target.inspect
+          # puts target.name
+          # puts target.db_password
+          # puts target.db_username
+          instance.run(migration, target, sqr_name)
         end
 
         def run_appengine(args=nil)

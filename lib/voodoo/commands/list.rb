@@ -6,7 +6,7 @@ module Voodoo
     def self.list
       setup?
       env_table = table
-      env_table.headings = ['Configured Environments']
+      env_table.headings = ['ENVIRONMENTS']
       Voodoo.environments.keys.each do |env|
         env_table << [env]
       end

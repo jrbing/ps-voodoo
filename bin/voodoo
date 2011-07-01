@@ -88,21 +88,21 @@ command :migrate do |c|
   end
 end
 
-command :run_appengine do |c|
-  c.syntax = 'voodoo run_appengine [ae_name] [environment]'
+command :'run appengine' do |c|
+  c.syntax = 'voodoo run appengine [ae_name] [environment]'
   c.summary = 'runs an appengine against the specified environment'
   c.description = 'Runs an appengine against the specified PeopleSoft environment'
-  c.example 'Run the VERSION appengine agains VDTEST', 'voodoo run_appengine VERSION VDTEST'
+  c.example 'Run the VERSION appengine agains VDTEST', 'voodoo run appengine VERSION VDTEST'
   c.action do |args|
     Voodoo::Commands.run_appengine(args)
   end
 end
 
-command :run_sqr do |c|
+command :'run sqr' do |c|
   c.syntax = 'voodoo run sqr [sqr name] [environment]'
   c.summary = 'runs the specified sqr locally'
   c.description = 'Run the specified SQR locally using the sqr bin specified in the environment configuration.'
-  c.example 'Run SQR', 'voodoo run_sqr SETSPACE.sqr VDDEV'
+  c.example 'Run SQR', 'voodoo run sqr SETSPACE.sqr VDDEV'
   c.action do |args|
     Voodoo::Commands.run_sqr(args)
   end
