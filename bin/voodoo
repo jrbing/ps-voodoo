@@ -78,6 +78,16 @@ command :build do |c|
   end
 end
 
+command :archive do |c|
+  c.syntax = 'voodoo archive [project] [environment]'
+  c.summary = 'copies a project to file from the specified environment'
+  c.description = 'Copies a project from the specified environment to file in the output directory'
+  c.example 'Archive specified project', 'voodoo archive EXAMPLE_PROJECT VDTEST'
+  c.action do |args|
+    Voodoo::Commands.archive(args)
+  end
+end
+
 command :migrate do |c|
   c.syntax = 'voodoo migrate [project] [source] [target]'
   c.summary = 'migrates a project between environments'
@@ -107,16 +117,4 @@ command :'run sqr' do |c|
     Voodoo::Commands.run_sqr(args)
   end
 end
-
-
-# command :test do |c|
-#   c.syntax = 'voodoo setup [options]'
-#   c.summary = ''
-#   c.description = ''
-#   c.example 'description', 'command example'
-#   c.option '--some-switch', 'Some switch that does something'
-#   c.action do |args, options|
-#     c.when_called Voodoo::Commands.test(args, options)
-#   end
-# end
 

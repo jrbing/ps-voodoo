@@ -9,9 +9,11 @@ module Voodoo
   LIBPATH = ::File.expand_path(::File.dirname(__FILE__)) + ::File::SEPARATOR
   PATH = ::File.dirname(LIBPATH) + ::File::SEPARATOR
 
-  # Log settings
   LOG = Logger.new(STDOUT)
-  LOG.level = Logger::DEBUG
+  LOG.level = Logger::INFO
+  LOG.formatter = proc { |severity, datetime, progname, msg|
+      "#{Time.now.strftime("%m/%d/%Y %H:%M:%S")}: #{msg}\n"
+    }
 
   def self.libpath( *args )
     rv =  args.empty? ? LIBPATH : ::File.join(LIBPATH, args.flatten)

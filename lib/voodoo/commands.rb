@@ -40,6 +40,7 @@ module Voodoo
           env = OpenStruct.new(ENVIRONMENTS[name])
           env.name = name
           env.db_password = get_db_password(name)
+          puts env.db_password
       else
           puts "#{name} is not listed in the configuration file"
           exit
@@ -101,11 +102,11 @@ module Voodoo
     private
 
     def get_app_password(name)
-      ask("Password for #{name}: ") { |q| q.echo = "*" }
+      ask("Application password for #{name}: ") { |q| q.echo = "*" }
     end
 
     def get_db_password(name)
-      ask("Password for #{name}: ") { |q| q.echo = "*" }
+      ask("Database password for #{name}: ") { |q| q.echo = "*" }
     end
 
   end

@@ -2,7 +2,6 @@ module Voodoo
 
   module Commands
 
-    # TODO: add an error message if there are no environments configured
     def self.list
       setup?
       env_table = table

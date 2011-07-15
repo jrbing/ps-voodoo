@@ -64,14 +64,11 @@ module Voodoo
     def call_executable
       LOG.debug("Executable is set to #{@executable}")
       LOG.debug("Command line options are set to #{@command_line_options.join(" ")}")
-      # f = IO.popen(@executable + " " + @command_line_options.join(" "))
-      # f.readlines.each { |line| LOG.debug("#{line}")}
-      # f.close
-      # output = Open3.popen3(@executable + " " + @command_line_options.join(" "))
-      # LOG.debug(output)
-      Open3.popen2(@executable + " " + @command_line_options.join(" ")) {|i,o,t|
-        p o.gets
-      }
+
+      f = IO.popen(@executable + " " + @command_line_options.join(" "))
+      f.readlines.each { |line| LOG.info("#{line.chomp}")}
+      f.close
+
       @command_line_options.clear
       set_base_parameters
     end
