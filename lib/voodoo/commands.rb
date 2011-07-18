@@ -8,7 +8,7 @@ module Voodoo
 
     def setup?
       if CONFIGURATION.ps_home == nil
-        LOG.warnA("Global configuration not defined...use <voodoo config>")
+        puts "Global configuration not defined...use <voodoo config>"
         exit
       end
 
@@ -24,40 +24,52 @@ module Voodoo
     end
 
     def get_env(name)
-      #TODO: fix this to throw an error message and exit if the environment isn't listed
-      OpenStruct.new(ENVIRONMENTS[name])
+      if ENVIRONMENTS[name]
+          env = OpenStruct.new(ENVIRONMENTS[name])
+          env.name = name
+          env.app_password = get_app_password(name)
+      else
+          puts "#{name} is not listed in the configuration file"
+          exit
+      end
+      return env
+    end
+
+    def get_db_env(name)
+      if ENVIRONMENTS[name]
+          env = OpenStruct.new(ENVIRONMENTS[name])
+          env.name = name
+          env.db_password = get_db_password(name)
+          puts env.db_password
+      else
+          puts "#{name} is not listed in the configuration file"
+          exit
+      end
+      return env
     end
 
     def get_source
-      choose("Environments") do |menu|
-        menu.index = :letter
-        menu.index_suffix = ") "
-        menu.prompt = "Specify the source environment:  "
-        ENVIRONMENTS.keys.each do |x|
-          menu.choice(x) do |i|
-            env = OpenStruct.new(ENVIRONMENTS[i])
-            env.name = i
-            env.app_password = get_app_password(i)
-            return env
-          end
-        end
-      end
+      source = ask("Source environment: ", ENVIRONMENTS.keys)
+      env = OpenStruct.new(ENVIRONMENTS[source])
+      env.name = source
+      env.app_password = get_app_password(source)
+      return env
     end
 
     def get_target
-      choose("Environments") do |menu|
-        menu.index = :letter
-        menu.index_suffix = ") "
-        menu.prompt = "Specify the target environment:  "
-        ENVIRONMENTS.keys.each do |x|
-          menu.choice(x) do |i|
-            env = OpenStruct.new(ENVIRONMENTS[i])
-            env.name = i
-            env.app_password = get_app_password(i)
-            return env
-          end
-        end
-      end
+      target = ask("Target environment: ", ENVIRONMENTS.keys)
+      env = OpenStruct.new(ENVIRONMENTS[target])
+      env.name = target
+      env.app_password = get_app_password(target)
+      return env
+    end
+
+    def get_database
+      name = ask("Database name: ", ENVIRONMENTS.keys)
+      env = OpenStruct.new(ENVIRONMENTS[name])
+      env.name = name
+      env.db_password = get_db_password(name)
+      return env
     end
 
     def get_migration
@@ -75,6 +87,7 @@ module Voodoo
       ask("Appengine name: ")
     end
 
+    #TODO: change this so that you can specify the root of a drive
     def get_path(prompt)
       ask("#{prompt}: ") do |q|
         q.validate = %r=^(([a-zA-Z]:)|(\\{2}\w+)\$?)(\\(\w[\w ]*))=
@@ -86,10 +99,21 @@ module Voodoo
       Time.now.strftime("%m/%d/%Y %H:%M:%S") + " >>> "
     end
 
+    def validate_env(name)
+      unless ENVIRONMENTS[name]
+        puts "#{name} is not listed in the configuration file"
+        exit
+      end
+    end
+
     private
 
     def get_app_password(name)
-      ask("Password for #{name}: ") { |q| q.echo = "*" }
+      ask("Application password for #{name}: ") { |q| q.echo = "*" }
+    end
+
+    def get_db_password(name)
+      ask("Database password for #{name}: ") { |q| q.echo = "*" }
     end
 
   end

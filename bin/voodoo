@@ -78,72 +78,43 @@ command :build do |c|
   end
 end
 
+command :archive do |c|
+  c.syntax = 'voodoo archive [project] [environment]'
+  c.summary = 'copies a project to file from the specified environment'
+  c.description = 'Copies a project from the specified environment to file in the output directory'
+  c.example 'Archive specified project', 'voodoo archive EXAMPLE_PROJECT VDTEST'
+  c.action do |args|
+    Voodoo::Commands.archive(args)
+  end
+end
+
 command :migrate do |c|
   c.syntax = 'voodoo migrate [project] [source] [target]'
   c.summary = 'migrates a project between environments'
   c.description = 'Migrates a project between two environments after running a compare report and copying the objects to file'
-  c.example 'Migrate project between environments', 'voodoo migrate EXAMPLE_PROJECT --source VDDEV --target VDTEST'
+  c.example 'Migrate project between environments', 'voodoo migrate EXAMPLE_PROJECT VDDEV VDTEST'
   c.action do |args|
     Voodoo::Commands.migrate(args)
   end
 end
 
-# command :'run sqr' do |c|
-#   c.syntax = 'voodoo run sqr [sqr name] [environment]'
-#   c.summary = 'runs the specified sqr locally'
-#   c.description = 'Run the specified SQR locally using the sqr bin specified in the environment configuration.'
-#   c.example 'Run SQR', 'voodoo run sqr SETSPACE.sqr VDDEV'
-#   c.action do |args|
-#     Voodoo::Commands.run_sqr(args)
-#   end
-# end
+command :'run appengine' do |c|
+  c.syntax = 'voodoo run appengine [ae_name] [environment]'
+  c.summary = 'runs an appengine against the specified environment'
+  c.description = 'Runs an appengine against the specified PeopleSoft environment'
+  c.example 'Run the VERSION appengine agains VDTEST', 'voodoo run appengine VERSION VDTEST'
+  c.action do |args|
+    Voodoo::Commands.run_appengine(args)
+  end
+end
 
-# command :'run appengine' do |c|
-#   c.syntax = 'voodoo run appengine [appengine name] [environment]'
-#   c.summary = 'runs the specified appengine locally'
-#   c.description = 'Run the specified AppEngine locally.'
-#   c.example 'Run AppEngine', 'voodoo run appengine XXXXX VDDEV'
-#   c.action do |args|
-#     Voodoo::Commands.run_appengine(args)
-#   end
-# end
-
-# command :shell do |c|
-#   c.syntax = 'voodoo shell'
-#   c.summary = 'start Voodoo in and interactive console mode'
-#   c.description = 'Starts Voodoo in a mode for entering multiple commands'
-#   c.action do
-#       loop do
-#         choose("") do |menu|
-#           menu.layout = ''
-#           # menu.layout = :menu_only
-#           menu.prompt = '>>> '
-#           menu.shell  = true
-
-#           menu.choice(:list, "List configured environments") do |command, arguments|
-#             Voodoo::Commands.list
-#           end
-
-#           menu.choice(:show, "Show environment details") do |command, arguments|
-#             args = arguments.scan(/\w+/)
-#             Voodoo::Commands.show(args)
-#           end
-
-#           menu.choice(:quit, "Exit voodoo") { exit }
-
-#       end
-#     end
-#   end
-# end
-
-# command :test do |c|
-#   c.syntax = 'voodoo setup [options]'
-#   c.summary = ''
-#   c.description = ''
-#   c.example 'description', 'command example'
-#   c.option '--some-switch', 'Some switch that does something'
-#   c.action do |args, options|
-#     c.when_called Voodoo::Commands.test(args, options)
-#   end
-# end
+command :'run sqr' do |c|
+  c.syntax = 'voodoo run sqr [sqr name] [environment]'
+  c.summary = 'runs the specified sqr locally'
+  c.description = 'Run the specified SQR locally using the sqr bin specified in the environment configuration.'
+  c.example 'Run SQR', 'voodoo run sqr SETSPACE.sqr VDDEV'
+  c.action do |args|
+    Voodoo::Commands.run_sqr(args)
+  end
+end
 
