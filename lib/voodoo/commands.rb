@@ -99,6 +99,13 @@ module Voodoo
       Time.now.strftime("%m/%d/%Y %H:%M:%S") + " >>> "
     end
 
+    def validate_env(name)
+      unless ENVIRONMENTS[name]
+        puts "#{name} is not listed in the configuration file"
+        exit
+      end
+    end
+
     private
 
     def get_app_password(name)
