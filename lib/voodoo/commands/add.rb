@@ -5,7 +5,7 @@ module Voodoo
 
     def self.add(args=nil)
       settings = {}
-      puts "\n### Appdesigner/Datamover/AppEngine Settings ###"
+      puts "\n----Appdesigner/Datamover/AppEngine Settings------"
       if args.first.nil?
         name = ask("Database name: ").upcase
       else
@@ -17,7 +17,7 @@ module Voodoo
         settings['migration_archive'] = get_path("Archive destination")
       end
 
-      puts "\n### SQR Settings ###"
+      puts "\n----SQR Settings----------------------------------"
       settings['db_username'] = ask("Database username: ") { |q| q.default = "sysadm" }
       settings['ps_home'] = get_path("PS_HOME directory")
 
