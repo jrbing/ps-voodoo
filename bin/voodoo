@@ -9,9 +9,11 @@ program :name, 'Voodoo'
 program :version, Voodoo::VERSION
 program :description, 'Black Magic Utility for PeopleSoft Administration'
 
+global_option('--debug') { Voodoo.show_debugging }
+
 command :add do |c|
   c.syntax = 'voodoo add [environment name]'
-  c.summary = 'adds an environment to the configuration file'
+  c.summary = 'Adds an environment to the configuration file'
   c.description = 'Prompts for environment information and saves it to the environment configuration file'
   c.example 'Prompt for setup values before adding VDDMO to the configuration file', 'voodoo add VDDMO'
   c.action do |args|
@@ -21,7 +23,7 @@ end
 
 command :remove do |c|
   c.syntax = 'voodoo remove [environment name]'
-  c.summary = 'removes an environment from the configuration file'
+  c.summary = 'Removes an environment from the configuration file'
   c.description = 'Deletes the specified environment from the configuration file'
   c.example 'Removes the environment VDDMO from the configuration file', 'voodoo remove VDDMO'
   c.action do |args|
@@ -41,7 +43,7 @@ end
 
 command :show do |c|
   c.syntax = 'voodoo show [environment name]'
-  c.summary = 'shows configuration details for an environment'
+  c.summary = 'Shows configuration details for an environment'
   c.description = 'Outputs a table containing information about the specified environment'
   c.example 'Show information about VDDMO', 'voodoo show VDDMO'
   c.action do |args|
@@ -51,7 +53,7 @@ end
 
 command :config do |c|
   c.syntax = 'voodoo config'
-  c.summary = 'create global configuration settings'
+  c.summary = 'Create global configuration settings'
   c.description = 'Prompts for global configuration information and saves it to the configuration file'
   c.action do |args, options|
     c.when_called Voodoo::Commands.config
@@ -60,7 +62,7 @@ end
 
 command :compare do |c|
   c.syntax = 'voodoo compare [project] [source] [target]'
-  c.summary = 'create a compare report for the specified project'
+  c.summary = 'Create a compare report for the specified project'
   c.description = 'Creates an HTML compare report for the specified project and opens it in the default browser'
   c.example 'Create a compare report between two environments', 'voodoo compare EXAMPLE_PROJECT VDDEV VDTEST'
   c.action do |args|
@@ -70,7 +72,7 @@ end
 
 command :build do |c|
   c.syntax = 'voodoo build [project] [environment]'
-  c.summary = 'builds a project definition in the specified environment'
+  c.summary = 'Builds a project definition in the specified environment'
   c.description = 'Builds a project definition script for the specified project using AppDesigner and executes it in the target database'
   c.example 'Build specified project', 'voodoo build EXAMPLE_PROJECT VDTEST'
   c.action do |args|
@@ -80,7 +82,7 @@ end
 
 command :archive do |c|
   c.syntax = 'voodoo archive [project] [environment]'
-  c.summary = 'copies a project to file from the specified environment'
+  c.summary = 'Copies a project to file from the specified environment'
   c.description = 'Copies a project from the specified environment to file in the output directory'
   c.example 'Archive specified project', 'voodoo archive EXAMPLE_PROJECT VDTEST'
   c.action do |args|
@@ -90,7 +92,7 @@ end
 
 command :migrate do |c|
   c.syntax = 'voodoo migrate [project] [source] [target]'
-  c.summary = 'migrates a project between environments'
+  c.summary = 'Migrates a project between environments'
   c.description = 'Migrates a project between two environments after running a compare report and copying the objects to file'
   c.example 'Migrate project between environments', 'voodoo migrate EXAMPLE_PROJECT VDDEV VDTEST'
   c.action do |args|
@@ -100,7 +102,7 @@ end
 
 command :'run appengine' do |c|
   c.syntax = 'voodoo run appengine [ae_name] [environment]'
-  c.summary = 'runs an appengine against the specified environment'
+  c.summary = 'Runs an appengine against the specified environment'
   c.description = 'Runs an appengine against the specified PeopleSoft environment'
   c.example 'Run the VERSION appengine agains VDTEST', 'voodoo run appengine VERSION VDTEST'
   c.action do |args|
@@ -110,11 +112,21 @@ end
 
 command :'run sqr' do |c|
   c.syntax = 'voodoo run sqr [sqr name] [environment]'
-  c.summary = 'runs the specified sqr locally'
+  c.summary = 'Runs the specified sqr locally'
   c.description = 'Run the specified SQR locally using the sqr bin specified in the environment configuration.'
   c.example 'Run SQR', 'voodoo run sqr SETSPACE.sqr VDDEV'
   c.action do |args|
     Voodoo::Commands.run_sqr(args)
+  end
+end
+
+command :'template datafix' do |c|
+  c.syntax = 'voodoo template datafix [output folder]'
+  c.summary = 'Creates a datafix folder with sample files'
+  c.description = 'Create a folder and populate sample files to be updated with datafix SQL.'
+  c.example 'Create datafix folder', 'voodoo template datafix SAMPLE_DATAFIX'
+  c.action do |args|
+    Voodoo::Commands.template_datafix(args)
   end
 end
 

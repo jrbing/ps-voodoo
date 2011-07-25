@@ -3,7 +3,11 @@ module Voodoo
 
   class Migration
 
+    attr_reader :migration_folder
+    attr_reader :migration_name
+
     def initialize(name)
+      @migration_name = name
       @migration_folder = create_folder(File.join(CONFIGURATION.migration_output_dir, name))
     end
 
@@ -49,7 +53,7 @@ module Voodoo
 
     def create_folder(folder_path)
       Dir.mkdir(folder_path) unless File.exists?(folder_path)
-      return folder_path
+      return folder_path.gsub!(File::SEPARATOR, File::ALT_SEPARATOR)
     end
 
   end

@@ -15,6 +15,10 @@ module Voodoo
       "#{Time.now.strftime("%m/%d/%Y %H:%M:%S")}: #{msg}\n"
     }
 
+  def self.show_debugging
+    LOG.level = Logger::DEBUG
+  end
+
   def self.libpath( *args )
     rv =  args.empty? ? LIBPATH : ::File.join(LIBPATH, args.flatten)
     if block_given?
