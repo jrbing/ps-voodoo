@@ -13,6 +13,8 @@ module Voodoo
       end
       settings['db_type'] = ask("Database type: ", %w{ORACLE}) { |q| q.default = "ORACLE" }
       settings['app_username'] = ask("Application username: ")
+
+      puts "\n----Output Archive Settings-----------------------"
       if agree("\nWould you like to archive migration output files for this environment? (y/n) ") == true
         settings['migration_archive'] = get_path("Archive destination")
       end
