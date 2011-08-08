@@ -33,11 +33,11 @@ module Voodoo
       generated_backup = ERB.new(backup_template, 0, "%<>")
       generated_script = ERB.new(script_template, 0, "%<>")
 
-      backup_file = File.join(datafix.migration_folder, 'backup.dms').gsub!(File::SEPARATOR, File::ALT_SEPARATOR))
+      backup_file = File.join(datafix.migration_folder, 'backup.dms').gsub!(File::SEPARATOR, File::ALT_SEPARATOR)
       puts "Creating file #{backup_file}"
       File.open(backup_file, 'w') {|f| f.write(generated_backup.result(vars_binding))}
 
-      script_file = File.join(datafix.migration_folder, 'script.sql').gsub!(File::SEPARATOR, File::ALT_SEPARATOR))
+      script_file = File.join(datafix.migration_folder, 'script.sql').gsub!(File::SEPARATOR, File::ALT_SEPARATOR)
       puts "Creating file #{script_file}"
       File.open(script_file, 'w') {|f| f.write(generated_script.result(vars_binding))}
 
