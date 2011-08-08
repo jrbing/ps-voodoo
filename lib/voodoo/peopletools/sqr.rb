@@ -12,6 +12,7 @@ module Voodoo
     end
 
     def run(migration, target, sqr_name)
+      @sqr_name = sqr_name
       append(:sqr => File.join(target.ps_home, 'sqr', sqr_name).gsub!(File::SEPARATOR, File::ALT_SEPARATOR))
       append(:db_login => target.db_username + '/' + target.db_password + '@' + target.name)
       append(:input => File.join(target.ps_home, 'sqr').gsub!(File::SEPARATOR, File::ALT_SEPARATOR))
@@ -56,8 +57,9 @@ module Voodoo
       LOG.debug("Executable is set to #{@executable}")
       LOG.debug("Command line options are set to #{@command_line_options.join(" ")}")
 
+      puts "Running #{@sqr_name}..."
       f = IO.popen(@executable + " " + @command_line_options.join(" "))
-      f.readlines.each { |line| LOG.info("#{line.chomp}")}
+      f.readlines.each { |line| puts ("#{line.chomp}")}
       f.close
 
       @command_line_options.clear

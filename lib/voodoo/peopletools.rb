@@ -66,7 +66,7 @@ module Voodoo
       LOG.debug("Command line options are set to #{@command_line_options.join(" ")}")
 
       f = IO.popen(@executable + " " + @command_line_options.join(" "))
-      f.readlines.each { |line| LOG.info("#{line.chomp}")}
+      f.readlines.each { |line| puts ("#{line.chomp}")}
       f.close
 
       @command_line_options.clear
