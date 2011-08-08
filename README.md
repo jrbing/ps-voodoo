@@ -1,13 +1,21 @@
 VooDoo
 ===========
 
-VooDoo is a command line application to help automate some PeopleSoft administration activities that are typically performed locally.  
+VooDoo is a command line application to help automate some PeopleSoft
+administration activities that are typically performed locally.
 
 Why?
-----
-PeopleSoft installation and administration is tedious.  Migrating projects, generating compare reports, and running SQR's locally is a pain.
+---- 
 
-VooDoo alleviates some of this by providing a simple command line interface for interacting with your local PeopleTools installation using predefined settings for each of your environments.  For example, migrating a project between two environments using VooDoo is as simple as issuing the following command: 
+PeopleSoft installation and administration is tedious.
+Migrating projects, generating compare reports, and running SQR's
+locally is a pain.
+
+VooDoo alleviates some of this by providing a simple command line
+interface for interacting with your local PeopleTools installation
+using predefined settings for each of your environments. For example,
+migrating a project between two environments using VooDoo is as simple
+as issuing the following command:
 
     C:\> voodoo migrate TEST_PROJECT HRDEV HRTEST
 
@@ -22,7 +30,7 @@ VooDoo alleviates some of this by providing a simple command line interface for 
 
 
 Super. What are the requirements?
-------------
+---------------------------------
 
 In order to run VooDoo, you'll first need the following:
 
@@ -82,7 +90,8 @@ To run a compare report:
     Name for output folder: VOODOO_TEST
     07/18/2011 13:09:54: Creating compare reports for SCRIPTING_TEST between FNDEV and FNSPTB
 
-If successful, the generated HTML output of the compare report will be opened in your default browser.  To see what else you can do, run: 
+If successful, the generated HTML output of the compare report will be
+opened in your default browser. To see what else you can do, run:
 
     C:\>voodoo help
       NAME:
@@ -107,6 +116,7 @@ If successful, the generated HTML output of the compare report will be opened in
         run appengine        runs an appengine against the specified environment
         run sqr              runs the specified sqr locally
         show                 shows configuration details for an environment
+        template datafix     creates a datafix folder with template files
 
       GLOBAL OPTIONS:
 
@@ -124,9 +134,15 @@ If successful, the generated HTML output of the compare report will be opened in
 Sounds too easy.  How does it work?
 ----------------------------------
 
-It's actually pretty simple.  Global and environment configuration data is stored in YAML files under the .voodoo folder in the user's HOME directory.  When commands are issued to VooDoo, it uses the environment configuration information to pass command line arguments to the local executable.  
+It's actually pretty simple. Global and environment configuration data
+is stored in YAML files under the .voodoo folder in the user's HOME
+directory. When commands are issued to VooDoo, it uses the environment
+configuration information to pass command line arguments to the local
+executable.
 
-In some situations the Windows registry is updated to set options that cannot be passed via the command line (project build output destinations, datamover output destinations).
+In some situations the Windows registry is updated to set options
+that cannot be passed via the command line (project build output
+destinations, datamover output destinations).
 
 
 Who wrote this thing?
@@ -149,8 +165,8 @@ distribute, sublicense, and/or sell copies of the Software, and to
 permit persons to whom the Software is furnished to do so, subject to
 the following conditions:
 
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
 EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF

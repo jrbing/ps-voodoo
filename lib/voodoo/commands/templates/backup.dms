@@ -1,0 +1,10 @@
+-- Datafix <%= name %>
+-- Created on: <%= Time.now.localtime.strftime("%m/%d/%Y") %>
+
+SET OUTPUT <%= folder %>\backup.dat;
+SET LOG <%= folder %>\backup.log;
+
+% records.each do |record|
+EXPORT <%= record.upcase %> WHERE ... ;
+% end
+
