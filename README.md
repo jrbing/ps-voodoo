@@ -116,6 +116,7 @@ opened in your default browser. To see what else you can do, run:
         run appengine        runs an appengine against the specified environment
         run sqr              runs the specified sqr locally
         show                 shows configuration details for an environment
+        template datafix     creates a datafix folder with template files
 
       GLOBAL OPTIONS:
 
