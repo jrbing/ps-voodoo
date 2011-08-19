@@ -1,5 +1,5 @@
 require 'terminal-table/import'
-require 'mail'
+# require 'mail'
 Voodoo.require_all_libs_relative_to(__FILE__)
 
 module Voodoo
