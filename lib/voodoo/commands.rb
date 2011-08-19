@@ -41,7 +41,6 @@ module Voodoo
           env = OpenStruct.new(ENVIRONMENTS[name])
           env.name = name
           env.db_password = get_db_password(name)
-          puts env.db_password
       else
           puts "#{name} is not listed in the configuration file"
           exit
@@ -83,7 +82,6 @@ module Voodoo
       ask("SQR name: ")
     end
 
-    #TODO: validate that the appengine name and path is valid
     def get_appengine
       ask("Appengine name: ")
     end
