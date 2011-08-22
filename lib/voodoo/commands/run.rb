@@ -26,6 +26,7 @@ module Voodoo
         end
 
         def run_appengine(args=nil)
+          setup?
 
           if args[0].nil?
             ae_name = get_appengine

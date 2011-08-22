@@ -21,7 +21,7 @@ module Voodoo
     end
 
     def get_project
-      ask("Project name: ")
+      ask("Project name: ").upcase
     end
 
     def get_env(name)
@@ -73,17 +73,17 @@ module Voodoo
     end
 
     def get_migration
-      folder_name = ask("Name for output folder: ")
+      folder_name = ask("Name for output folder: ").upcase
       Migration.new(folder_name)
     end
 
-    #TODO: validate that the SQR name and path is valid
+    #TODO: figure out how to get this to recursively search a directory
     def get_sqr
       ask("SQR name: ")
     end
 
     def get_appengine
-      ask("Appengine name: ")
+      ask("Appengine name: ").upcase
     end
 
     #TODO: change this so that you can specify the root of a drive
@@ -108,11 +108,13 @@ module Voodoo
     private
 
     def get_app_password(name)
-      ask("Application password for #{name}: ") { |q| q.echo = "*" }
+      username = ENVIRONMENTS[name]['app_username']
+      ask("Application password for #{username + '@' + name}: ") { |q| q.echo = "*" }
     end
 
     def get_db_password(name)
-      ask("Database password for #{name}: ") { |q| q.echo = "*" }
+      username = ENVIRONMENTS[name]['app_username']
+      ask("Database password for #{username + '@' + name}: ") { |q| q.echo = "*" }
     end
 
   end
