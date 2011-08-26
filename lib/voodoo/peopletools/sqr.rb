@@ -23,6 +23,7 @@ module Voodoo
       append(:xmb=> true)
       append(:xcb=> true)
       append(:debug=> true)
+      puts "Running #{@sqr_name}..."
       call_executable
     end
 
@@ -57,7 +58,6 @@ module Voodoo
       LOG.debug("Executable is set to #{@executable}")
       LOG.debug("Command line options are set to #{@command_line_options.join(" ")}")
 
-      puts "Running #{@sqr_name}..."
       f = IO.popen(@executable + " " + @command_line_options.join(" "))
       f.readlines.each { |line| puts ("#{line.chomp}")}
       f.close
