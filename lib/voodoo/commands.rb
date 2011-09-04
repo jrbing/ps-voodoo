@@ -113,7 +113,7 @@ module Voodoo
     end
 
     def get_db_password(name)
-      username = ENVIRONMENTS[name]['app_username']
+      username = ENVIRONMENTS[name]['db_username']
       ask("Database password for #{username + '@' + name}: ") { |q| q.echo = "*" }
     end
 
