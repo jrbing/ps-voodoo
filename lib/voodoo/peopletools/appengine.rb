@@ -15,6 +15,7 @@ module Voodoo
       append(:env_password => target.app_password)
       append(:r => '1')
       append(:ae_name => ae_name)
+      puts "Running #{ae_name}..."
       call_executable
     end
 

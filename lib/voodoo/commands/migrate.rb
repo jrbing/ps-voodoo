@@ -61,7 +61,7 @@ module Voodoo
       end
 
       # Move output files to archive folder for the target
-      if agree("Copy output files to archive folder for #{target.name}? ") == true
+      if target.migration_archive && agree("Copy output files to archive folder for #{target.name}? ") == true
         migration.copy_to_archive(target.migration_archive)
       end
 

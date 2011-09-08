@@ -19,7 +19,6 @@ module Voodoo
           end
 
           migration = get_migration
-          puts migration.log_folder
 
           instance = Voodoo::Sqr.new
           instance.run(migration, target, sqr_name)
