@@ -1,11 +1,17 @@
 PATH
   remote: .
   specs:
-    ps-voodoo (0.0.1)
+    ps-voodoo (0.0.6)
+      commander (= 4.0.4)
+      terminal-table (>= 1.4.2)
 
 GEM
   remote: http://rubygems.org/
   specs:
+    commander (4.0.4)
+      highline (>= 1.5.0)
+    highline (1.6.2)
+    terminal-table (1.4.2)
 
 PLATFORMS
   x86-mingw32
