@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{Black magic utility for PeopleSoft administration}
   s.description = %q{A small command line utility for helping with PeopleSoft administration}
 
-  s.add_dependency("commander", [">= 4.0.4"])
+  s.add_dependency("commander", ["= 4.0.4"])
   s.add_dependency("terminal-table", [">= 1.4.2"])
 
   s.rubyforge_project = "ps-voodoo"
