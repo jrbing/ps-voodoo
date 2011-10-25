@@ -12,7 +12,8 @@ module Voodoo
   LOG = Logger.new(STDOUT)
   LOG.level = Logger::INFO
   LOG.formatter = proc { |severity, datetime, progname, msg|
-      "#{Time.now.strftime("%m/%d/%Y %H:%M:%S")}: #{msg}\n"
+      #"#{Time.now.strftime("%m/%d/%Y %H:%M:%S")}: #{msg}\n"
+      ">>> #{msg}\n"
     }
 
   def self.show_debugging
