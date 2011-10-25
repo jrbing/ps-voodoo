@@ -63,7 +63,7 @@ module Voodoo
       #f.readlines.each { |line| puts ("#{line.chomp}")}
       #f.close
       pid = spawn(@executable + " " + @command_line_options.join(" "))
-      LOG.info("Created background process #{pid} for #{@executable}")
+      LOG.debug("Created background process #{pid} for #{@executable}")
       Process.detach(pid)
 
       @command_line_options.clear
