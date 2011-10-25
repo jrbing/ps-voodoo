@@ -42,7 +42,7 @@ module Voodoo
       ad.copy_to_file(project, migration, source)
 
       # Copy definition only to database
-      ad.migrate_project_definition(project, migration, source, target)
+      #ad.migrate_project_definition(project, migration, source, target)
 
       # Copy target to file
       ad.copy_to_file(project, migration, target)
