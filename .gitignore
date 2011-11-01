@@ -7,3 +7,5 @@ lib/voodoo/commands/test.rb
 pkg
 
 .DS_Store
+
+Gemfile.lock
