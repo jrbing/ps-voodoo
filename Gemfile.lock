@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ps-voodoo (0.0.6)
+    ps-voodoo (0.0.7)
       commander (= 4.0.4)
       terminal-table (>= 1.4.2)
 
@@ -11,9 +11,10 @@ GEM
     commander (4.0.4)
       highline (>= 1.5.0)
     highline (1.6.2)
-    terminal-table (1.4.2)
+    terminal-table (1.4.3)
 
 PLATFORMS
+  ruby
   x86-mingw32
 
 DEPENDENCIES
