@@ -1,5 +1,10 @@
 # Changelog # 
 
+## Version 0.0.8 ##
+
+* changed logging prompt
+* modified the run commands to launch sqr and appengine processes in the background
+
 ## Version 0.0.6 ##
 
 * removed archive prompting for environments without one specified in the configuration
