@@ -23,7 +23,8 @@ module Voodoo
       append(:xmb=> true)
       append(:xcb=> true)
       append(:debug=> true)
-      puts "Running #{@sqr_name}..."
+      LOG.info("Running #{@sqr_name}...")
+      #puts "Running #{@sqr_name}..."
       call_executable
     end
 
@@ -58,9 +59,12 @@ module Voodoo
       LOG.debug("Executable is set to #{@executable}")
       LOG.debug("Command line options are set to #{@command_line_options.join(" ")}")
 
-      f = IO.popen(@executable + " " + @command_line_options.join(" "))
-      f.readlines.each { |line| puts ("#{line.chomp}")}
-      f.close
+      #f = IO.popen(@executable + " " + @command_line_options.join(" "))
+      #f.readlines.each { |line| puts ("#{line.chomp}")}
+      #f.close
+      pid = spawn(@executable + " " + @command_line_options.join(" "))
+      LOG.debug("Created background process #{pid} for #{@executable}")
+      Process.detach(pid)
 
       @command_line_options.clear
     end
