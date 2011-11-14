@@ -41,7 +41,7 @@ module Voodoo
         append(:output_folder => migration.export_folder(source.name))
         append(:log_file => File.join(migration.log_folder, "Copy_#{source.name}_to_file.log"))
         call_executable
-        LOG.info("Project copied to file successfully")
+        #LOG.info("Project copied to file successfully")
       rescue
         LOG.error("Project file copy failed")
       end
@@ -60,7 +60,7 @@ module Voodoo
         append(:target_password => target.app_password)
         append(:log_file => File.join(migration.log_folder, "Copy_project_#{project}_from_#{source.name}_to_#{target.name}.log"))
         call_executable
-        LOG.info("Project migrated successfully")
+        #LOG.info("Project migrated successfully")
       rescue
         LOG.error("Project migration failed")
       end
@@ -81,7 +81,7 @@ module Voodoo
         append(:exp => '1')
         append(:obj => '16')
         call_executable
-        LOG.info("Project migrated successfully")
+        #LOG.info("Project migrated successfully")
       rescue
         LOG.error("Project definition migration failed")
       end
@@ -97,7 +97,7 @@ module Voodoo
         append(:build_project => project)
         update_build_settings(File.join(migration.log_folder, "PSBUILD.log"), File.join(migration.sql_folder, "PSBUILD.sql"))
         call_executable
-        LOG.info("Project build SQL created successfully")
+        #LOG.info("Project build SQL created successfully")
       rescue
         LOG.error("Project SQL build failed")
       end
