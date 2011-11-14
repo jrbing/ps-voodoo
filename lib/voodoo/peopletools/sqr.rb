@@ -6,19 +6,19 @@ module Voodoo
     attr_accessor :command_line_options, :executable
 
     def initialize
-      @sqr_bin = File.join(Voodoo.configuration[:ps_home], %w{bin sqr ORA BINW}).gsub!(File::SEPARATOR, File::ALT_SEPARATOR)
+      @sqr_bin = File.join(Voodoo.configuration[:ps_home], %w{bin sqr ORA BINW})
       @executable = File.join(@sqr_bin, %w{sqrw.exe})
       @command_line_options = []
     end
 
     def run(migration, target, sqr_name)
       @sqr_name = sqr_name.gsub(/\.sqr/, '')
-      append(:sqr => File.join(target.ps_home, 'sqr', @sqr_name).gsub!(File::SEPARATOR, File::ALT_SEPARATOR))
+      append(:sqr => File.join(target.ps_home, 'sqr', @sqr_name))
       append(:db_login => target.db_username + '/' + target.db_password + '@' + target.name)
-      append(:input => File.join(target.ps_home, 'sqr').gsub!(File::SEPARATOR, File::ALT_SEPARATOR))
+      append(:input => File.join(target.ps_home, 'sqr'))
       append(:output => migration.log_folder)
-      append(:log_file => File.join(migration.log_folder, @sqr_name + '_' + Time.now.strftime("%Y_%m_%d_%H_%M_%S") + '.log').gsub!(File::SEPARATOR, File::ALT_SEPARATOR))
-      append(:zif => File.join(target.ps_home, 'sqr', 'pssqr.ini').gsub!(File::SEPARATOR, File::ALT_SEPARATOR))
+      append(:log_file => File.join(migration.log_folder, @sqr_name + '_' + Time.now.strftime("%Y_%m_%d_%H_%M_%S") + '.log'))
+      append(:zif => File.join(target.ps_home, 'sqr', 'pssqr.ini'))
       append(:print => true)
       append(:xmb=> true)
       append(:xcb=> true)
@@ -52,6 +52,7 @@ module Voodoo
           when k == :debug
             '-DEBUGX'
         end
+        @command_line_options.gsub!(File::SEPARATOR, File::ALT_SEPARATOR)
       end
     end
 
