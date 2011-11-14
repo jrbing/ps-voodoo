@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ps-voodoo (0.0.7)
+    ps-voodoo (0.0.8)
       commander (= 4.0.4)
       terminal-table (>= 1.4.2)
 
