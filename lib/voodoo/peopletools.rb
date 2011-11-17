@@ -10,7 +10,7 @@ module Voodoo
 
     def initialize
       set_base_parameters
-      @tools_bin = File.join(Voodoo.configuration[:ps_home], %w{bin client winx86})
+      @tools_bin = File.join(Voodoo.configuration[:ps_home], %w{bin client winx86}).gsub!(File::SEPARATOR, File::ALT_SEPARATOR)
       LOG.debug("Tools bin is set to #{@tools_bin}")
     end
 
@@ -58,7 +58,6 @@ module Voodoo
           when k == :output_folder
             '-FP ' + v
         end
-        @command_line_options.gsub!(File::SEPARATOR, File::ALT_SEPARATOR)
       end
     end
 

@@ -13,7 +13,7 @@ module Voodoo
       append(:env_name => source.name)
       append(:env_username => source.app_username)
       append(:env_password => source.app_password)
-      append(:output_folder => File.join(migration.sql_folder, script_name))
+      append(:output_folder => File.join(migration.sql_folder, script_name).gsub!(File::SEPARATOR, File::ALT_SEPARATOR))
       update_dms_settings(migration.sql_folder, migration.log_folder)
       call_executable
     end

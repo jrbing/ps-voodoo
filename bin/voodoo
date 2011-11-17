@@ -94,6 +94,7 @@ command :migrate do |c|
   c.syntax = 'voodoo migrate [project] [source] [target]'
   c.summary = 'Migrates a project between environments'
   c.description = 'Migrates a project between two environments after running a compare report and copying the objects to file'
+  #c.option '--prefix STRING', String, 'Adds a prefix to bar'
   c.example 'Migrate project between environments', 'voodoo migrate EXAMPLE_PROJECT VDDEV VDTEST'
   c.action do |args|
     Voodoo::Commands.migrate(args)

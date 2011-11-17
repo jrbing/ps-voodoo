@@ -3,7 +3,7 @@ module Voodoo
     module Commands
         extend self
 
-        def run_sqr(args=nil)
+        def run_sqr(args=nil, options=nil)
           setup?
 
           if args[0].nil?
