@@ -10,7 +10,7 @@ module Voodoo
 
     def compare(project, migration, source, target)
       begin
-        LOG.info("Creating compare reports for #{project} between #{source.name} and #{target.name}")
+        LOG.info("Creating compare report for #{project} between #{source.name} and #{target.name}")
         append(:db_type => source.db_type)
         append(:env_name => source.name)
         append(:env_username => source.app_username)
