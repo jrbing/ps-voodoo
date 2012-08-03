@@ -8,3 +8,6 @@ pkg
 .DS_Store
 Gemfile.lock
 tags
+skeleton/
+
+solarized-css/
