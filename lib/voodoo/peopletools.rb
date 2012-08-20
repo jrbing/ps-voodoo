@@ -57,6 +57,8 @@ module Voodoo
             '-AI ' + v
           when k == :output_folder
             '-FP ' + v
+          when k == :report_filter
+            '-FLTR 11111 11111 11111 11111 11111'
         end
       end
     end
