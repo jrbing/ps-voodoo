@@ -5,6 +5,7 @@ SET OUTPUT <%= folder %>\backup.dat;
 SET LOG <%= folder %>\backup.log;
 
 % records.each do |record|
-EXPORT <%= record.upcase %> WHERE ... ;
+EXPORT <%= record.upcase %>
+WHERE ... ;
 % end
 
