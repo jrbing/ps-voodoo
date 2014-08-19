@@ -24,7 +24,6 @@ module Voodoo
       append(:xcb=> true)
       append(:debug=> true)
       LOG.info("Running #{@sqr_name}...")
-      #puts "Running #{@sqr_name}..."
       call_executable
     end
 
