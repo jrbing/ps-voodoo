@@ -59,6 +59,8 @@ module Voodoo
             '-FP ' + v
           when k == :report_filter
             '-FLTR 11111 11111 11111 11111 11111'
+          when k == :composite_reports
+            '-CMR ' + v
         end
       end
     end

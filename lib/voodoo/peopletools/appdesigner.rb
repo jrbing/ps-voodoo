@@ -24,6 +24,7 @@ module Voodoo
         append(:compare_folder => migration.compare_folder(source.name, target.name))
         append(:cmxml => '1')
         append(:report_filter => '1')
+        append(:composite_reports => '0')
         call_executable
         view_compare_report(migration.compare_folder(source.name, target.name))
       rescue
